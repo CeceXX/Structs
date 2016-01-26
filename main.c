@@ -17,7 +17,18 @@ struct Medico {
     int numeroMassimoPazienti;
 };
 
-void inserireNuovoMedico() {
+int acquisisciNumeroCompresoTraValori(int inserimentoMinimoConsentito, int inserimentoMassimoConsentito) {
+    int inserimento;
+    scanf("%d", &inserimento);
+    while ((inserimento < inserimentoMinimoConsentito) || (inserimento > inserimentoMassimoConsentito)) {
+        printf("'%d' non e' un inserimento valido. Inserisci un valore compreso tra %d e %d: ", inserimento, inserimentoMinimoConsentito, inserimentoMassimoConsentito);
+        scanf("%d", &inserimento);
+    }
+    return inserimento;
+}
+
+void inserireNuovoMedico(struct Medico medici[]) {
+    printf("Inserisci nome: ");
 }
 
 void mostraMenu(struct Medico medici[]) {
@@ -28,16 +39,25 @@ void mostraMenu(struct Medico medici[]) {
         "Visualizza medici",
     };
     
-    int numeroOpzioni = 4, i = 0, sceltaMenu;
+    int numeroOpzioni = 4, i = 0;
     
     puts("------------------------------------");
     for (i = 0; i < numeroOpzioni; i++) {
         printf("| %d | %s\n", i+1, opzioni[i]);
     }
     puts("------------------------------------");
-
+    
+    
     printf("Seleziona un'opzione del menu: ");
-    scanf("%d", &sceltaMenu);
+    int sceltaMenu = acquisisciNumeroCompresoTraValori(1, numeroOpzioni);
+    
+    switch (sceltaMenu) {
+        case 1:
+            inserireNuovoMedico(medici);
+            break;
+        default:
+            break;
+    }
 }
 
 int main() {
